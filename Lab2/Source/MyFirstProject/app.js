@@ -28,8 +28,33 @@ mapRashmiApp.controller('mainController', function($scope) {
     $scope.pageClass = 'home';
 });
 
-mapRashmiApp.controller('loginController', function($scope) {
+//mapRashmiApp.controller('loginController', function($scope,$http) {
+
+mapRashmiApp.controller('loginController',function($scope,$http) {
     $scope.pageClass = 'login';
+
+	$scope.login=function (userName,pwd) {
+		//localStorage.setItem("name" , user);
+		//$scope.logins.push( localStorage.getItem("name") + " was logged in.");
+		if(userName=="rashmitripathi18@gmail.com" && pwd=="1234"){
+						window.location.replace("home.html");
+		}
+		else {
+			window.alert("Login Failed");
+		}
+		// $http.get("home.html")
+		//	.then(function(response) {
+		//		console.log(" Getting HTMl");
+	//	$scope.userName = response.userName;
+		//})
+
+//		$http.get("home.html")
+//			.success(function(response) {
+		//		console.log(" Getting HTMl");
+		//		$scope.userName = response.userName;
+		//	});
+
+	}
 });
 
 mapRashmiApp.controller('registerController', function($scope) {
@@ -144,81 +169,8 @@ $(function () {
 });
 
 
-/* Login Page JS*/
-
-$(function(){
-	$('.button-checkbox').each(function(){
-		var $widget = $(this),
-			$button = $widget.find('button'),
-			$checkbox = $widget.find('input:checkbox'),
-			color = $button.data('color'),
-			settings = {
-				on: {
-					icon: 'glyphicon glyphicon-check'
-				},
-				off: {
-					icon: 'glyphicon glyphicon-unchecked'
-				}
-			};
-
-		$button.on('click', function () {
-			$checkbox.prop('checked', !$checkbox.is(':checked'));
-			$checkbox.triggerHandler('change');
-			updateDisplay();
-		});
-
-		$checkbox.on('change', function () {
-			updateDisplay();
-		});
-
-		function updateDisplay() {
-			var isChecked = $checkbox.is(':checked');
-			// Set the button's state
-			$button.data('state', (isChecked) ? "on" : "off");
-
-			// Set the button's icon
-			$button.find('.state-icon')
-				.removeClass()
-				.addClass('state-icon ' + settings[$button.data('state')].icon);
-
-			// Update the button's color
-			if (isChecked) {
-				$button
-					.removeClass('btn-default')
-					.addClass('btn-' + color + ' active');
-			}
-			else
-			{
-				$button
-					.removeClass('btn-' + color + ' active')
-					.addClass('btn-default');
-			}
-		}
-		function init() {
-			updateDisplay();
-			// Inject the icon if applicable
-			if ($button.find('.state-icon').length == 0) {
-				$button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
-			}
-		}
-		init();
-	});
-});
-
-var loginApp=angular.module("loginApp",['ngRoute','ngAnimate']);
-
-loginApp.config(function ($routeProvider) {
 
 
 
-});
 
-
-
-mapRashmiApp.controller('loginController', function($scope, $http) {
-	$http.get("home.html")
-		.then(function(response) {
-			$scope.userName = response.userName;
-		});
-});
 
