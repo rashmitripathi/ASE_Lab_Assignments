@@ -196,3 +196,25 @@ html         { overflow-y:hidden; }
 .search-query:focus + button {
 	z-index: 3;
 }
+
+
+html {
+	overflow: -moz-scrollbars-vertical;
+	overflow-y: scroll;
+}
+
+.custom {
+	font-family: "Old English Text MT";
+	color: darkslategrey;
+	font-size:46px;
+	text-align: center;
+}
+.buttonHolder{ text-align: center; }
+
+/* For small screen */
+.row :nth-child(even){
+	background-color: #dcdcdc;
+}
+.row :nth-child(odd){
+	background-color: #aaaaaa;
+}

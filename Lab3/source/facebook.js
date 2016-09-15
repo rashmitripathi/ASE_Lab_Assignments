@@ -68,7 +68,4 @@ function successfulLogin() {
         document.getElementById("status").innerHTML=str;
 
     });
-
-
-
 }

@@ -1,6 +1,4 @@
-
 <!DOCTYPE html>
-
 <head>
     <script src="http://code.angularjs.org/1.2.13/angular.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-route.js"></script>
@@ -8,7 +6,7 @@
     <script src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script src="app.js"></script>
     <script src="facebook.js"></script>
-    <script src="yahoonews.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -25,142 +23,39 @@
     <link rel="stylesheet" href="css/style.css">
 
 </head>
-<body lang="" data-ng-app="TopNews">
+<body lang="" data-ng-app="TopNews" background="paper.jpg">
 <div  ng-controller="homeController" style="top: 200px">
 
     <div class="menu" id="div_SearchContainer">
-        <h1 align="absolute" style="text-align: center; color: #1ab188">NEWS CHANNEL</h1>
+        <h1 class="custom">NEWS CHANNEL</h1>
        <!-- <input type="text" id="txt_searchWord" placeholder="search news stories" style="margin-left: 100px"/>-->
-        <button id="btn_getNews"  ng-click="searchYahooNews()">Get Top News</button>
+       <div class="buttonHolder"> <button id="btn_getNews"  ng-click="searchTopNews()">Get Top News</button></div>
     </div>
 
     <div id="div_VenueList">
-        <h2 style="text-align: center; color: #1ab188">Latest top  Stories Using NEWYORK times API </h2>
+        <h2 style="text-align: center; color:midnightblue">Top  Stories by NY Times API </h2>
         <ul>
             <TABLE  class="table table-hover" BORDER=2 CELLPADDING=4>
-               <thead>
+               <thead  style="background:darkblue; color:white">
                   <tr>
                       <th>Title</th>
                       <th>Category</th>
                       <th>Abstract</th>
+                      <th>Sentiment</th>
                   </tr>
                </thead>
                 <tbody>
-                <TR ng-repeat="news in newsList">  <TD> <a  href={{news.url}} target="_blank" style="font-size: small; color: #5e5e5e; text-align: left;">{{news.title}}</a></TD> <TD>{{news.section}}</TD> <TD>{{news.abstract}}</TD></TR>
+                <TR ng-repeat="news in newsList">
+                    <TD> <a  href={{news.url}} target="_blank" style="font-size: small; color: #5e5e5e; text-align: left;">{{news.title}}</a></TD>
+                    <TD>{{news.section}}</TD>
+                    <TD>{{news.abstract}}</TD>
+                    <TD>{{news.sentiment}}</TD>
+                </TR>
                 </tbody>
             </TABLE>
-
         </ul>
-
-        <div id="div_ReviewList" style="display:none;"  >
-
-
-            <p ng-model="ReviewWithSentiment">
-
-            <TABLE BORDER=2 CELLPADDING=4> <TR> <TH style="color: aliceblue; background:#1ab188" COLSPAN=2>Sentiment Analysis From Using Alchemy API </TH> </TR>
-                <TR> <TD>Most recent review</TD> <TD>{{ReviewWithSentiment.reviewText}}</TD> </TR>
-                <TR> <TD>Sentiment of the review</TD> <TD>{{ReviewWithSentiment.sentiment}}</TD> </TR>
-                <TR> <TD>Sentiment Score of the review</TD> <TD>{{ReviewWithSentiment.score}}</TD> </TR>
-                <TR> <TH style="color: aliceblue; background:#1ab188" COLSPAN=2 BGCOLOR="#445553">{{ReviewWithSentiment.reviewText}}</TH> </TR>
-            </TABLE>
-
-            </p>
-
-        </div>
-
-
     </div>
-
 </div>
 </body>
 </html>
 
-<script>
-    angular.module('TopNews', [])
-            .controller('homeController', function ($scope,$http) {
-
-                $scope.searchYahooNews = function () {
-
-                    $scope.newsList = new Array();
-
-                    var url = "https://api.nytimes.com/svc/topstories/v2/home.json";
-                    url += '?' + $.param({
-                                'api-key': "a5a334cacf4748dda9c62ae2837e51e0"
-                            });
-
-                    var handler = $http.get(url);
-                    handler.success(function (data1) {
-
-                        if (data1 != null && data1.results != null ) {
-                            console.log("Inside start loop ");
-                           // for (var i = 0; i < data1.results.length; i++) {
-                            for (var i = 0; i < 5; i++) {
-                                console.log("Inside loop"+i);
-                                console.log(data1.results[i].abstract);
-                                console.log(data1.results[i].url);
-                                $scope.newsList[i] = {
-                                    "abstract": data1.results[i].abstract,
-                                    "section": data1.results[i].section,
-                                    "title": data1.results[i].title,
-                                    "url":data1.results[i].url
-                                };
-                            }
-                        }
-
-                    })
-                    handler.error(function (data) {
-                        alert("There was some error processing your request. Please try after some time.");
-                    });
-
-                  /*  $.ajax({
-                        url: url,
-                        method: 'GET',
-                    }).done(function(data1) {
-                        console.log("copy data");
-                        console.log(data1);
-                        console.log("outside loop 1");
-                    }).fail(function(err) {
-                        alert("error");
-                    });*/
-
-                }
-
-
-                $scope.getReviews = function (newsSelected) {
-                    if (venueSelected != null) {
-                        //This is the API call being made to get the reviews(tips) for the selected place or venue.
-                        var handler = $http.get("https://api.foursquare.com/v2/venues/" + venueSelected.id + "/tips" +
-                                "?sort=recent" +
-                                "&client_id=Q0ENF1YHFTNPJ31DCF13ALLENJW0P5MTH13T1SA0ZP1MUOCI" +
-                                "&client_secret=ZH4CRZNEWBNTALAE3INIB5XG0QI12R4DT5HKAJLWKYE1LHOG&v=20160215" +
-                                "&limit=5");
-                        handler.success(function (result) {
-                            if (result != null && result.response != null && result.response.tips != null &&
-                                    result.response.tips.items != null) {
-                                $scope.mostRecentReview = result.response.tips.items[0];
-                                //This is the Alchemy API for getting the sentiment of the most recent review for a news.
-                                var callback = $http.get("http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment" +
-                                        "?apikey=d0e7bf68cdda677938e6c186eaf2b755ef737cd8" +
-                                        "&outputMode=json&text=" + $scope.mostRecentReview.text);
-                                callback.success(function (data) {
-                                    if(data!=null && data.docSentiment!=null)
-                                    {
-                                        $scope.ReviewWithSentiment = {"reviewText" : $scope.mostRecentReview.text,
-                                            "sentiment":data.docSentiment.type,
-                                            "score":data.docSentiment.score  };
-                                        document.getElementById('div_ReviewList').style.display = 'block';
-
-
-                                    }
-                                })
-                            }
-                        })
-                        handler.error(function (result) {
-                            alert("There was some error processing your request. Please try after some time.")
-                        })
-                    }
-
-                }
-
-            });
-</script>
