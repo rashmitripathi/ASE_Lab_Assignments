@@ -163,62 +163,69 @@ public class SearchActivity extends AppCompatActivity {
         for(Book book:bookList)
         {
             TableRow row= new TableRow(this);
-            /*TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-            row.setLayoutParams(lp);*/
-            row.setBackgroundColor(Color.BLACK);
-            row.setPadding(0, 0, 0, 2); //Border between rows
+            TableRow row1= new TableRow(this);
+            TableRow row2= new TableRow(this);
+            TableRow row3= new TableRow(this);
 
-            TextView title = new TextView(this);
+            tableRowSettings(row);
+
+
             ImageView bookImage = new ImageView(this);
 
-            TextView author = new TextView(this);
-            TextView rating = new TextView(this);
-            TextView price=new TextView(this);
-
-            // bookImage.setImageResource(book.getImage_url());
-            title.setText(book.getTitle()+" ");
-            author.setText(book.getAuthor()+" ");
-            rating.setText(book.getRating()+" ");
-            price.setText(book.getAmount()+" ");
-
-            title.setPadding(0, 0, 1, 3);
-            author.setPadding(0, 0, 1, 3);
-            rating.setPadding(0, 0, 1, 3);
-            price.setPadding(0, 0, 1, 3);
-
-            //New Cell
-            LinearLayout cell1 = new LinearLayout(this);
-            cell1.setBackgroundColor(Color.WHITE);
-            cell1.addView(title);
+            LinearLayout cell1=createCell(book.getTitle(),0);
 
 
-            LinearLayout cell2 = new LinearLayout(this);
-            cell2.setBackgroundColor(Color.WHITE);
+            LinearLayout cell2=createCell(book.getAuthor(),1);
+            LinearLayout cell3=createCell(book.getRating(),0);
+            LinearLayout cell4=createCell(book.getAmount(),0);
 
-            cell2.addView(author);
-
-            LinearLayout cell3 = new LinearLayout(this);
-            cell3.setBackgroundColor(Color.WHITE);
-
-            cell3.addView(rating);
-
-            LinearLayout cell4 = new LinearLayout(this);
-            cell4.setBackgroundColor(Color.WHITE);
-
-
-            cell4.addView(price);
 
             row.addView(cell1);
-            row.addView(cell2);
-            row.addView(cell3);
-            row.addView(cell4);
+            row1.addView(cell2);
+            row1.addView(cell3);
+            row1.addView(cell4);
 
             Log.d("add",book.getTitle());
 
             tl.addView(row,i);
-            i++;
+            tl.addView(row1,i+1);
+
+
+            i=i+2;
         }
     }
+
+
+    public void tableRowSettings(TableRow row)
+    {
+        row.setBackgroundColor(Color.BLACK);
+        row.setPadding(0, 0, 0, 2); //Border between rows
+    }
+
+    public LinearLayout createCell(String text,int i)
+    {
+
+        TextView tv = new TextView(this);
+        tv.setPadding(0, 0, 1, 3);
+
+        if(i==1)
+        {
+            tv.setText("   "+text+"  ");
+        }else
+        {
+            tv.setText(text+"  ");
+        }
+
+
+
+        LinearLayout cell = new LinearLayout(this);
+        cell.setBackgroundColor(Color.WHITE);
+        cell.addView(tv);
+        return cell;
+
+
+    }
+
 
     public void logout(View v) {
         Intent redirect = new Intent(SearchActivity.this, LoginActivity.class);

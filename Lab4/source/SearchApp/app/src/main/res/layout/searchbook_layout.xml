@@ -75,12 +75,12 @@
         </TableRow>
     </TableLayout>
 
-    <ScrollView android:layout_height="120dp">
+    <ScrollView android:layout_height="900dp">
 
         <TableLayout
             android:id="@+id/bookTable"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="900dp"
             android:layout_above="@+id/getBookList"
             android:layout_marginTop="20dp"
             ></TableLayout>
