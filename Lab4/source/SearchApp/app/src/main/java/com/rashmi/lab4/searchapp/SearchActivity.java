@@ -173,9 +173,7 @@ public class SearchActivity extends AppCompatActivity {
             ImageView bookImage = new ImageView(this);
 
             LinearLayout cell1=createCell(book.getTitle(),0);
-
-
-            LinearLayout cell2=createCell(book.getAuthor(),1);
+            LinearLayout cell2=createCell(book.getAuthor()+"  "+book.getRating()+"*  "+book.getAmount(),1);
             LinearLayout cell3=createCell(book.getRating(),0);
             LinearLayout cell4=createCell(book.getAmount(),0);
 
