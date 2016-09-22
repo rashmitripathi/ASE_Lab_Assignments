@@ -1,0 +1,20 @@
+<resources>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Enter Email</string>
+    <string name="prompt_password">Enter Password</string>
+    <string name="action_sign_in">Sign In</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="facebook_app_id">1296893260322084</string>
+    <string name="fb_login_protocol_scheme">1296893260322084</string>
+    <string name="app_name">Search Books</string>
+    <string name="accounts">Accounts</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="error">Error</string>
+    <string name="error_format">[Error] %s</string>
+    <string name="Log_Out">Log Out</string>
+</resources>
