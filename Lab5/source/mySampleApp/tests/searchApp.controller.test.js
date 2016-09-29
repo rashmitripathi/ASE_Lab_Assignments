@@ -57,7 +57,7 @@ describe('registerCtrl', function() {
 
 describe("Unit Testing Examples", function() {
 
-  beforeEach(angular.mock.module('App'));
+  beforeEach(angular.mock.module('app'));
 
   it('should have a LoginCtrl controller', function() {
     expect(App.LoginCtrl).toBeDefined();
@@ -111,7 +111,7 @@ describe("Unit Testing Examples", function() {
 
 describe('testController', function () {
     var $controller, $scope, AuthenticationService;
-    var dt = {username: "user1", password: "user1"};
+    var dt = {un: "rashmitripathi@gmail.com", pwd: "rashmi"};
 
    beforeEach(module('app', {
   LoginService : { Login: jasmine.createSpy().and.returnValue(dt) }
