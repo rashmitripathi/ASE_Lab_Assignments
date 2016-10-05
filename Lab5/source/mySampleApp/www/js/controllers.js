@@ -41,7 +41,6 @@ angular.module('app.controllers', [])
 })
 
 
-
 .controller('registerCtrl', function($scope, $state,$filter,$q,LoginService) {
    
      $scope.registerData={
