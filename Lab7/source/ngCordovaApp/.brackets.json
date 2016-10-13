@@ -1,0 +1,10 @@
+{
+    "jscodehints.detectedExclusions": [
+        "C:/Users/Puchu/Documents/GitHub/ASE_Lab_Assignments/Lab5/source/mySampleApp/plugins/cordova-plugin-console/tests/tests.js",
+        "C:/Users/Puchu/Documents/GitHub/ASE_Lab_Assignments/Lab5/source/mySampleApp/plugins/cordova-plugin-console/www/console-via-logger.js",
+        "C:/Users/Puchu/Documents/GitHub/ASE_Lab_Assignments/Lab5/source/mySampleApp/plugins/cordova-plugin-console/www/logger.js",
+        "C:/Users/Puchu/Documents/GitHub/ASE_Lab_Assignments/Lab5/source/mySampleApp/www/js/controllers.js",
+        "C:/Users/Puchu/Documents/GitHub/ASE_Lab_Assignments/Lab5/source/mySampleApp/plugins/cordova-plugin-device/src/firefoxos/DeviceProxy.js",
+        "C:/Users/Puchu/Documents/GitHub/ASE_Lab_Assignments/Lab5/source/mySampleApp/plugins/cordova-plugin-device/src/tizen/DeviceProxy.js"
+    ]
+}
