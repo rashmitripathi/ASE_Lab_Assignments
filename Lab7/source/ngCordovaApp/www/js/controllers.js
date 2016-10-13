@@ -93,16 +93,46 @@ var map=null;
 $scope.initialise = function() {
     
 console.log("In Google.maps.event.addDomListener");
-var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+var myLatlng = new google.maps.LatLng(39.0345, -94.6647);
 var mapOptions = {
 center: myLatlng,
 zoom: 16,
 //mapTypeId: 'satellite'    
 mapTypeId: google.maps.MapTypeId.ROADMAP
 };
+    
+    var lat  = 39.0345;
+      var long =  -94.6647;
+    
+ var myLocation = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, long),
+            map: map,
+            title: "My Location"
+        });    
+    
+    
 map = new google.maps.Map(document.getElementById("map"), mapOptions);
     
     console.log(mapOptions);
+    
+    var posOptions = {timeout: 10000, enableHighAccuracy: false};
+  
+    $cordovaGeolocation
+    .getCurrentPosition(posOptions)
+    .then(function (position) {
+      var lat  = position.coords.latitude
+      var long = position.coords.longitude
+       map.setCenter(new google.maps.LatLng(lat, long));
+        var myLocation = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, long),
+            map: map,
+            title: "My Location"
+        });
+    }, function(err) {
+      // error
+    });
+
+    
    
     navigator.geolocation.getCurrentPosition(function(pos) {
         console.log("position: "+pos);
