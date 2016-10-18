@@ -12,3 +12,5 @@ Assignment 5 -https://github.com/rashmitripathi/ASE_Lab_Assignments/wiki/Lab-Ass
 Assignment 6 -https://github.com/rashmitripathi/ASE_Lab_Assignments/wiki/Lab-Assignment-6 (AndroidCamera&Map)
 
 Assignment 7 -https://github.com/rashmitripathi/ASE_Lab_Assignments/wiki/Lab-Assignment-7 (AndroidIonicCordova&Yslow)
+
+Assignment 8 -https://github.com/rashmitripathi/ASE_Lab_Assignments/wiki/Lab-Assignment-7 (Rest Services)
