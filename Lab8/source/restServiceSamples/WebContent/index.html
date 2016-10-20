@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books Search</title>
+    <script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-route.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-animate.js"></script>
+    <style>
+        body{
+            background: url('http://cdn.wallpapersafari.com/89/8/LUVw9Z.jpg') no-repeat fixed center center;
+        }
+        #topic{
+            width: 300px;
+            height: 30px;
+            background: transparent;
+            border: 4px solid rgba(0,0,0,1.6);
+            border-radius: 4px;
+            color: #000000;
+            font-family: 'Exo', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 4px;
+        }
+        #submit{
+            width: 260px;
+            height: 35px;
+            border:  4px solid rgba(0,0,0,1.6);
+            cursor: pointer;
+            border-radius: 4px;
+            color: #000000;
+            font-family: 'Exo', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 6px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body ng-app="app">
+
+<div ng-controller="homeController">
+
+    <div>
+        <h2>Search Books</h2>
+        <input type="text" id="topic" placeholder="Enter the topic you want to search books for" style="width:60%"/>
+        <button id="submit" ng-click="getBooks()">Submit</button>
+    </div>
+
+    <div style="width: 100%; margin-top: 10px; ">
+        <div id="div_bookList" style="display:none;" >
+
+            <TABLE BORDER=2 CELLPADDING=4> <TR> <TH>Books for this Topic are</TH> </TR>
+                <TR>
+                    <TH>BookCover</TH>
+                    <TH>Title</TH>
+                    <TH>Author</TH>
+                    <TH>Rating</TH>
+                    <TH>Amount</TH>
+                    <TH>Review</TH>
+                    <TH>Score</TH>
+                </TR>
+                <TR ng-repeat="book in booksList track by $index"">
+                    <TD><img src={{book.Image}}/></TD>
+                    <TD>{{book.Title}}</TD>
+                    <TD>{{book.Author}}</TD>
+                    <TD>{{book.Rating}}</TD>
+                    <TD>{{book.Amount}}</TD>
+                    <TD>{{book.Review}}</TD>
+                    <TD>{{book.Score}}</TD>
+
+                </TR>
+            </TABLE>
+
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+
+
+
+    angular.module('app', []).controller('homeController', function($scope, $http, $sce){
+
+
+        $scope.getBooks = function () {
+
+            $scope.booksList = new Array();
+            $scope.sentimentType=new String();
+            $scope.sentimentScore=new String();
+
+            var topic = document.getElementById('topic').value;
+            var url = "http://localhost:8080/restServiceSamples/rashmi/bookservice/"+topic+"";
+
+
+            var handler = $http.get(url);
+            handler.success(function (data) {
+                console.log("Inside first loop "+data);
+                if (data != null) {
+                    if (data.BookData != null) {
+                        console.log("Inside start loop ");
+
+                        //for (var i = 0; i < data.BookData.length; i++) {
+                        for (var i = 0; i < 3; i++) {
+                            console.log("Inside loop" + i+data.BookData[i].Title);
+                            
+                            var text = data.BookData[i].Title;
+                            var url1 = "http://localhost:8080/restServiceSamples/rashmi/reviewservice/"+text+"";
+                            console.log("doing second API call "+url1);
+                            var handler1 = $http.get(url1);
+                            handler1.success(function (result) {
+                                console.log("Second API call data"+result);
+                                if (result != null) {
+                                    console.log("setting all data"+i+data.BookData[i].Title+result.ReviewData.Type+result.ReviewData.Score);
+
+                                    sentimentType = result.ReviewData.Type+" ";
+                                    sentimentScore= result.ReviewData.Score+" ";}                             
+                            })
+
+                           
+                           
+
+                            $scope.booksList[i] = {
+
+                                    "Title": data.BookData[i].Title,
+                                    "Author": data.BookData[i].Author,
+                                    "Amount": data.BookData[i].Amount,
+                                    "Rating": data.BookData[i].Rating,
+                                    "Image":data.BookData[i].Image,
+                                    "Review":  sentimentType,
+                                    "Score":  sentimentScore
+                                };
+
+                             
+                        }
+                    }
+                }
+                document.getElementById('div_bookList').style.display = 'block';
+            })
+            handler.error(function (data) {
+                alert("There was some error processing your request. Please try after some time.");
+            });
+
+        }
+    });
+
+
+</script>
+</html>
