@@ -16,3 +16,5 @@ Assignment 7 -https://github.com/rashmitripathi/ASE_Lab_Assignments/wiki/Lab-Ass
 Assignment 8 -https://github.com/rashmitripathi/ASE_Lab_Assignments/wiki/Lab-Assignment-8 (Rest Services)
 
 Assignment 9 -https://github.com/rashmitripathi/ASE_Lab_Assignments/wiki/Lab-Assignment-9 (MashUpRestServicesWithNodejs)
+
+Assignment 10 -https://github.com/rashmitripathi/ASE_Lab_Assignments/wiki/Lab-Assignment-10 (CRUDRestServiceswithNodejs&AWS)
