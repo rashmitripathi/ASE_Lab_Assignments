@@ -105,7 +105,8 @@ app.get('/delete/:s_id', function (req, res) {
         });
     });
 })
-var insertDocument = function(db, data, callback) {
+
+ar insertDocument = function(db, data, callback) {
     db.collection('demoase').insertOne( data, function(err, result) {
         if(err)
         {
